@@ -1,0 +1,67 @@
+// preprocessing_pipeline
+digraph {
+	dataSplit1 [label="dataSplit1,
+op=read_csv"]
+	dataSplit2 [label="dataSplit2,
+op=read_csv"]
+	data [label="data,
+op=merge"]
+	dataSplit2 -> data
+	dataSplit1 -> data
+	data_drop [label="data_drop,
+op=drop 0"]
+	data -> data_drop
+	"select 'duration_in_month', 'credit_his',  'credit_amt', 'preset_emp', 'personal_status_and_sex', 'guarantors', 'present_residence','property', 'age','label'" [label="select 'duration_in_month', 'credit_his',  'credit_amt', 'preset_emp', 'personal_status_and_sex', 'guarantors', 'present_residence','property', 'age','label',
+op=filter"]
+	data_drop -> "select 'duration_in_month', 'credit_his',  'credit_amt', 'preset_emp', 'personal_status_and_sex', 'guarantors', 'present_residence','property', 'age','label'"
+	"select data.credit_amt>=4000" [label="select data.credit_amt>=4000,
+op=filter"]
+	"select 'duration_in_month', 'credit_his',  'credit_amt', 'preset_emp', 'personal_status_and_sex', 'guarantors', 'present_residence','property', 'age','label'" -> "select data.credit_amt>=4000"
+	credit_his [label="credit_his,
+op=OneHotEncoder"]
+	"select data.credit_amt>=4000" -> credit_his
+	preset_emp [label="preset_emp,
+op=OneHotEncoder"]
+	"select data.credit_amt>=4000" -> preset_emp
+	personal_status_and_sex__imputer [label="personal_status_and_sex__imputer,
+op=SimpleImputer"]
+	"select data.credit_amt>=4000" -> personal_status_and_sex__imputer
+	personal_status_and_sex__onehot [label="personal_status_and_sex__onehot,
+op=OneHotEncoder"]
+	personal_status_and_sex__imputer -> personal_status_and_sex__onehot
+	guarantors__imputer [label="guarantors__imputer,
+op=SimpleImputer"]
+	"select data.credit_amt>=4000" -> guarantors__imputer
+	guarantors__onehot [label="guarantors__onehot,
+op=OneHotEncoder"]
+	guarantors__imputer -> guarantors__onehot
+	property__imputer [label="property__imputer,
+op=SimpleImputer"]
+	"select data.credit_amt>=4000" -> property__imputer
+	property__onehot [label="property__onehot,
+op=OneHotEncoder"]
+	property__imputer -> property__onehot
+	duration_in_month [label="duration_in_month,
+op=StandardScaler"]
+	"select data.credit_amt>=4000" -> duration_in_month
+	credit_amt [label="credit_amt,
+op=StandardScaler"]
+	"select data.credit_amt>=4000" -> credit_amt
+	present_residence [label="present_residence,
+op=StandardScaler"]
+	"select data.credit_amt>=4000" -> present_residence
+	age [label="age,
+op=StandardScaler"]
+	"select data.credit_amt>=4000" -> age
+	learner [label="learner,
+op=RandomForestClassifier"]
+	credit_his -> learner
+	preset_emp -> learner
+	personal_status_and_sex__onehot -> learner
+	guarantors__onehot -> learner
+	property__onehot -> learner
+	duration_in_month -> learner
+	credit_amt -> learner
+	present_residence -> learner
+	age -> learner
+}
