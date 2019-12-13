@@ -22,7 +22,7 @@ Fairness is becoming one of the most popular topics in machine learning communit
 
 
 
-##Team Member
+## Team Member
 
 Biao Huang  
 
