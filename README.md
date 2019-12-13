@@ -8,7 +8,7 @@ Fairness is becoming one of the most popular topics in machine learning communit
 - Graphs has the collection of codes, DAG and output logs.  
 - slides.pdf is the presentation slides.  
 
-## Updata Logs  
+## Update Logs  
 2019-11-17 Init Complete & sklearn graph updated    
 2019-11-17 Dataset Init  
 2019-11-20 DAG package test and Func Wrapper Pandas Trace   
@@ -19,6 +19,22 @@ Fairness is becoming one of the most popular topics in machine learning communit
 2019-12-01 Version 0.2.1 ready. DAG plots ready for testing; connect Pandas with Sklearn operations  
 2019-12-02 Version 0.2.2 ready. Test for multiple pipelines with varying complexity   
 2019-12-03 Version 0.2.3 ready. Bug fixed and graph generated.   
+
+
+
+##Team Member
+
+Biao Huang  
+
+Chenqin Yang  
+
+Rui Jiang  
+
+Zhengyuan Ding  
+
+
+
+
 
 
 
